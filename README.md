@@ -246,10 +246,4 @@ python -m hyundap.auth.create_account --email admin@example.com --role platform_
 
 <img src="images/stack_chips.png" alt="Claude, ChatGPT, Gemini" width="650" />
 
-전공자는 없지만 AI 에이전트와 함께 개발했습니다.
-
 <br>
-
-<img src="images/h_repos.png" alt="REPOSITORIES" width="100%" />
-
-### [demo-repository](https://github.com/hyundaisightcampus3/demo-repository)
