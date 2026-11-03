@@ -1,4 +1,4 @@
-<img src="[images/hero.png](https://github.com/doxoba/Hyundap/blob/develop/images/hero.png)" alt="현답. 다중 기업 문서 검색 도구" width="100%" />
+<img src="[images/hero.png]" alt="현답. 다중 기업 문서 검색 도구" width="100%" />
 
 # 김혜리(AI 서비스 개발) 포트폴리오
 
