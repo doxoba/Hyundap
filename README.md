@@ -1,249 +1,130 @@
-<img src="images/hero.png" alt="현답. 개떡같이 물어도, 찰떡같이 답해드립니다. 현대 부트캠프 AI서비스개발과정 3팀" width="100%" />
+<img src="images/hero.png" alt="현답. 다중 기업 문서 검색 도구" width="100%" />
+
+# 김혜리 · AI 서비스 개발 포트폴리오
+
+> **현답** — 회사 문서에 근거해 답하는 *다중 기업 문서 검색 플랫폼* 팀 프로젝트에서
+> **문서 수집·전처리(`ingest`) 파이프라인**을 설계하고 구현했습니다.
+
+| | |
+|---|---|
+| **이름** | 김혜리 ([@doxoba](https://github.com/doxoba)) |
+| **프로젝트** | 현대 부트캠프 AI서비스개발과정 3팀 / 1차 팀 프로젝트 |
+| **맡은 역할** | 문서 수집 및 전처리: 여러 확장자의 문서(PDF·DOCX·PPTX)가 업로드 가능한 파일인지 검사하고, 완료된 파일은 검색 가능한 조각으로 바꾸는 파이프라인 |
+
 
 <br>
 
-<img src="images/h_team.png" alt="우리 팀은요" width="100%" />
+## 1. 프로젝트 한눈에 보기
 
-## 우문현답, 우리들의 거친 문제도 현대의 답으로
+**문제:** 기업마다 보고서/매뉴얼 등의 자료가 PDF, Word, PowerPoint로 흩어져 있어서, 필요한 내용이 *어느 문서의 어느 쪽*에 있는지 찾기 어렵습니다.
 
-검색할 때마다 완벽한 질문을 던질 수는 없습니다.
-현답은 거친 질문에도 **회사 문서에 근거한 답**을 찾아 주는 AI 문서 검색 플랫폼을 만든 팀입니다.
-
-<br>
-
-<img src="images/h_members.png" alt="MEMBERS" width="100%" />
-
-<table>
-  <tr>
-    <td align="center" colspan="3">
-      <img src="images/avatar_0.png" width="130" alt="이성민" /><br>
-      <h2>이성민</h2>
-      <h3>팀장</h3>
-      <b>맡은 일</b> 일정·통합 관리, 공통 설정·스키마, 로그인·계정, 테스트·QA<br>
-      <b>담당 폴더</b> <code>common/</code> · <code>auth/</code> · <code>tests/</code><br>
-      <a href="https://github.com/paul8004-lee">@paul8004-lee</a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <img src="images/avatar_1.png" width="110" alt="전재경" /><br>
-      <h2>전재경</h2>
-      <b>맡은 일</b> DB 설계·저장, 회사 권한 확인<br>
-      <b>담당 폴더</b> <code>db/</code><br>
-      <a href="https://github.com/wjsworud1025">@wjsworud1025</a>
-    </td>
-    <td align="center" width="33%">
-      <img src="images/avatar_2.png" width="110" alt="박영준" /><br>
-      <h2>박영준</h2>
-      <b>맡은 일</b> 임베딩·벡터 저장<br>
-      <b>담당 폴더</b> <code>embedding/</code><br>
-      <a href="https://github.com/joon0724">@joon0724</a>
-    </td>
-    <td align="center" width="33%">
-      <img src="images/avatar_3.png" width="110" alt="박경환" /><br>
-      <h2>박경환</h2>
-      <b>맡은 일</b> 화면(UI)·앱 실행<br>
-      <b>담당 폴더</b> <code>ui/</code> · <code>app.py</code><br>
-      <a href="https://github.com/qkrrud141">@qkrrud141</a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <img src="images/avatar_4.png" width="110" alt="이준영" /><br>
-      <h2>이준영</h2>
-      <b>맡은 일</b> 검색·필터<br>
-      <b>담당 폴더</b> <code>search/</code><br>
-      <a href="https://github.com/wljycjdi2001-ljy">@wljycjdi2001-ljy</a>
-    </td>
-    <td align="center" width="33%">
-      <img src="images/avatar_5.png" width="110" alt="소용우" /><br>
-      <h2>소용우</h2>
-      <b>맡은 일</b> AI 답변·요약(챗봇)<br>
-      <b>담당 폴더</b> <code>chatbot/</code><br>
-      <a href="https://github.com/nasaro-pro">@nasaro-pro</a>
-    </td>
-    <td align="center" width="33%">
-      <img src="images/avatar_6.png" width="110" alt="김혜리" /><br>
-      <h2>김혜리</h2>
-      <b>맡은 일</b> 문서 수집·전처리<br>
-      <b>담당 폴더</b> <code>ingest/</code><br>
-      <a href="https://github.com/doxoba">@doxoba</a>
-    </td>
-  </tr>
-</table>
-
-<br>
-
-<img src="images/h_project.png" alt="PROJECT" width="100%" />
-
-## 업무·기술 매뉴얼 기반 AI 지식 탐색 및 요약 서비스
-
-세부 주제는 **다중 기업 문서 검색 플랫폼**입니다.
-기업별로 흩어진 매뉴얼·교육 자료·공개 자료를 **공통 구조로 정리**하고, **하나의 화면에서 검색**합니다.
+**해결:** 여러 회사의 문서를 공통 구조로 정리하고, 한 화면에서 검색합니다. AI 답변과 요약은 **원본 문서에서 근거를 찾은 경우에만** 보여 줍니다. 챗봇이 아니라 *근거를 찾아 주는 검색 플랫폼*이 목표였습니다.
 
 <div align="center">
 <img src="images/architecture.png" alt="다중 기업 문서 검색 플랫폼 구조도" width="100%" />
 </div>
 
-### 챗봇이 아니라 검색 플랫폼입니다
-
-실무자에게 필요한 것은 긴 대화형 답변보다 **원하는 내용이 어느 문서의 어느 위치에 있는지**를 바로 확인하는 일입니다.
-현답은 검색 결과를 중심에 두고, AI 답변과 요약은 모두 **원본 문서의 근거와 연결된 경우에만** 보여 줍니다.
-
 | 기능 | 내용 |
 |---|---|
-| **문서 검색** | 검색어와 문서 유형으로 찾습니다. 전체 관리자는 검색할 회사를 고를 수 있습니다. 결과 목록에서 문서를 고르면 오른쪽에 상세 정보와 근거 문장이 나옵니다. |
-| **짧은 AI 답변** | 검색어를 질문으로도 사용해, 이번 검색 결과 문서 안에서 찾은 답을 검색창 바로 아래에 한 줄로 보여 줍니다. |
-| **문서 요약** | 선택한 문서를 요약하고, 생성되는 내용을 줄 단위로 바로 보여 줍니다. 근거 표시가 없는 문장은 화면에 내보내지 않으며, 요약에 포함한 범위와 제외한 범위를 함께 표시합니다. |
-| **출처 확인·원본 다운로드** | 답변과 요약의 출처 번호에서 회사·파일·위치(쪽, 섹션, 슬라이드)를 확인하고 원본 파일을 내려받습니다. |
-| **문서 업로드** | 관리자가 PDF·DOCX·PPTX 파일을 여러 개 올립니다. 형식·암호·손상·구형 형식·중복을 검사한 뒤, 본문을 나누고 임베딩해 모든 조각이 저장된 경우에만 검색에 공개합니다. |
-| **회사별 권한** | 직원과 회사 관리자는 소속 회사 문서만, 전체 관리자는 허용된 모든 회사 문서를 봅니다. 화면이 보낸 역할·회사 값은 믿지 않고, 매 요청마다 서버가 DB 기준으로 다시 확인합니다. |
+| 문서 검색 | 의미 기반(벡터 유사도) 검색, 문서 유형·회사 필터 |
+| 짧은 AI 답변 | 검색 결과 문서 안에서 근거를 찾아 한 줄로 답변. 근거 없는 문장은 거부 |
+| 문서 요약 | 줄 단위로 근거를 확인하며 요약, 포함·제외한 범위를 함께 표시 |
+| 출처·원본 다운로드 | 답변의 출처 번호에서 회사·파일·위치(쪽, 섹션, 슬라이드) 확인 |
+| 문서 업로드 | 관리자가 PDF·DOCX·PPTX를 올리면 검증 → 추출 → 임베딩 → 저장 |
+| 회사별 권한 | 직원·회사 관리자·전체 관리자 3가지 역할. 요청마다 서버가 DB 기준으로 권한 재확인 |
 
-<br>
+**기술 스택.** Python · Gradio · OpenAI(`gpt-5`, `text-embedding-3-small`) · LangChain · MySQL(Railway) · Chroma · pypdf · python-docx · python-pptx · PaddleOCR
 
-<img src="images/h_scope.png" alt="구현 범위" width="100%" />
-
-## 구현 범위
-
-### 완료한 기능
-
-| 영역 | 내용 |
-|---|---|
-| 로그인 | 아이디·비밀번호 로그인, 서버 세션 발급·재검증·로그아웃, 역할 3종(직원·회사 관리자·전체 관리자) |
-| 검색 | 의미 기반 검색(벡터 유사도), 문서 유형·회사 필터, 회사 범위 밖 결과 차단 |
-| AI 답변 | 검색 결과 문서 범위의 근거 기반 답변, 근거 없는 문장 거부, 반환 직전 권한 재확인 |
-| 요약 | 문서 크기에 따라 최대 3구간으로 나눠 차례로 요약, 줄 단위 실시간 표시, 포함·제외 범위 표시 |
-| 업로드 | 여러 파일 순차 처리, 파일별 결과 표시, 원본 보관, 문서 버전 이력 |
-| 수집 | PDF(쪽)·DOCX(섹션)·PPTX(슬라이드) 본문 추출, 표 처리, 글자 정규화, 섹션 경계를 넘지 않는 청크 분할 |
-
-### 제외한 기능 (향후 과제)
-
-- 회원가입·비밀번호 변경 등 계정 관리 화면, 관리자용 문서 삭제·재색인 화면
-- 원문 PDF 뷰어, 특정 쪽 바로 열기
-- HWP·XLSX 등 추가 파일 형식, 이미지로만 된 스캔 문서의 글자 인식
-- 대화 이력 저장
-
-<br>
-
-## 시스템 구조
-
-### 폴더 구성
-
-| 폴더 | 역할 | 담당 |
-|---|---|---|
-| `hyundap/app.py`, `hyundap/ui/` | Gradio 화면, 화면과 백엔드 함수 연결 | 박경환 |
-| `hyundap/auth/` | 로그인, 세션, 계정 생성, 회사 권한 확인 | 이성민 |
-| `hyundap/db/` | MySQL 저장 구조, 업로드 처리 흐름, 문서 버전 | 전재경 |
-| `hyundap/ingest/` | 파일 검증, 본문 추출, 청크 분할 | 김혜리 |
-| `hyundap/embedding/` | OpenAI 임베딩, Chroma 벡터 저장소 | 박영준 |
-| `hyundap/search/` | 검색, 필터, 권한 범위 적용 | 이준영 |
-| `hyundap/chatbot/` | 근거 기반 답변, 문서 요약, 인용 검사 | 소용우 |
-| `hyundap/common/` | 공통 설정, 공통 자료형(문서·청크·문서 유형) | 이성민 |
-| `hyundap/tests/` | 단위·통합 테스트, QA·사용성 테스트 | 이성민(DB 테스트는 전재경) |
-
-폴더별 상세 설계는 각 폴더의 `README.md`와 `docs/spec.md`에 있으며, 전체 기능 명세는 [docs/spec.md](docs/spec.md)에 있습니다.
-
-### 처리 흐름
+**처리 흐름.**
 
 ```text
-[업로드] 관리자 → ui → db.upload_service
-            → ingest(검증·본문 추출·청크 분할) → embedding(임베딩·벡터 저장)
-            → db(모든 청크 저장 확인 후 버전 공개)
-
-[검색]  사용자 → ui → auth(세션·권한 확인) → search(벡터 검색·회사 필터) → 결과 목록
-[답변]  검색 결과 문서 → chatbot.ask(근거 기반 답변·인용 검사) → 검색창 아래 한 줄 답변
-[요약]  선택 문서 → chatbot.summary(구간별 요약·줄 단위 인용 검사) → 상세 영역에 실시간 표시
+[업로드] 관리자 → ui → db → ingest(검증·본문 추출·청크 분할) → embedding(임베딩·벡터 저장) → db(전부 저장되면 공개)
+[검색]   사용자 → ui → auth(권한) → search(벡터 검색·회사 필터) → 결과 목록
+[답변]   검색 결과 문서 → chatbot(근거 기반 답변·인용 검사)
 ```
 
 <br>
 
-## 실행 방법
+## 2. 내가 한 일: 문서 검사/수집/전처리 (`hyundap/ingest/`)
 
-모든 명령은 **저장소 맨 위 폴더**에서 실행합니다(`cd hyundap` 하지 않음). Python 3.11 이상이 필요합니다.
+**한 줄 요약:** 업로드된 문서 1개를 *"어느 회사 · 어느 파일 · 몇 쪽"* 정보가 붙은 검색용 조각(청크) 여러 개로 바꾸는 파이프라인을 처음부터 끝까지 맡았습니다.
 
-```bash
-python -X utf8 -m pip install -r requirements.txt   # 패키지 설치
-python -m hyundap.app                               # 앱 실행 (http://127.0.0.1:7860)
-python -m hyundap.app --mode demo                   # 예시 데이터로 화면 확인 (DB·OpenAI 호출 없음)
-python -m hyundap.app --check-backend               # 함수·패키지·설정 준비 상태만 점검
-python -m unittest discover -s hyundap/tests -t .   # 전체 테스트
+```text
+업로드 파일 → ① 검증 → ② 글자 추출 → ③ 글자 정리 → ④ 청킹 → 청크 목록
 ```
 
-`-X utf8`는 파이썬을 UTF-8 모드로 켜는 옵션입니다. requirements.txt에 한글 주석이 있어서, Windows 기본 인코딩(cp949)으로 요구 사항 파일을 읽는 구버전 pip(예: Python 3.11.9에 포함된 pip 24.0)에서는 설치가 `UnicodeDecodeError`로 실패합니다. 이 옵션을 붙이면 운영체제나 pip 버전에 상관없이 같은 명령으로 설치됩니다.
+이 단계의 품질이 곧 검색과 답변의 품질입니다. 청크에 출처 정보가 정확히 붙어 있어야 "근거 기반 답변"이 성립하기 때문에, **빠짐없이 읽는 것**과 **출처를 잃지 않는 것**에 가장 신경 썼습니다.
 
-패키지 설치 성공은 백엔드 서비스 준비 완료와 다릅니다. 설치 후 `python -m hyundap.app --check-backend`로 준비 상태를 점검하고, 실제 서비스 동작에는 아래 `.env` 설정과 인증 연동이 추가로 필요합니다.
+### 구현한 것
 
-포트를 바꾸려면 `--port 7861`처럼 지정합니다. 예시 모드의 체험 계정과 화면별 동작은 [UI 안내](hyundap/ui/README.md)를 참고합니다.
+| 단계 | 내용 |
+|---|---|
+| ① 검증 | 형식·용량(100MiB)·암호화·손상·구형 파일·중복(해시) 검사를 순서대로 실행하고, 실패 원인을 9가지 오류 코드로 구분해 돌려줌 |
+| ② 글자 추출 | PDF는 쪽, DOCX는 제목 구간, PPTX는 슬라이드 단위로 글자·표를 추출. PDF 머리말·쪽 번호 제거, 줄 끝에서 끊긴 한글 단어 이어 붙이기, DOCX 병합 셀 처리 |
+| ③ 글자 정리 | 한글 결합, 보이지 않는 글자 제거, 공백·줄바꿈 정리 |
+| ④ 청킹 | 약 1,000자(겹침 150자)로 자르되 쪽·슬라이드·섹션 경계는 넘지 않음 → 출처 위치가 정확하게 유지됨 |
+| 스캔·그림·차트 | 글자 레이어가 없는 스캔 PDF, 문서 속 그림의 글자를 OCR로 읽고, Office 차트는 XML에서 제목·항목·값을 직접 읽음 |
 
-### 환경 설정 (`.env`)
+### 설계하면서 고민한 것
 
-처음 받은 팀원은 루트의 [`.env.example`](.env.example)을 참고해 `.env`와 운영자가 전달한 회사별 DB 계정 파일을 한 번 설정합니다. 현재 split DB의 팀원 실행 순서는 [MYSQL_ACCESS.md](MYSQL_ACCESS.md#develop을-처음-받은-팀원)에 있습니다. 개인 PC의 `127.0.0.1:33992` SSH 터널 주소와 절대 파일 경로는 다른 PC에서 그대로 사용할 수 없습니다. 실제 비밀값은 Git으로 배포하지 않습니다.
+**1) 하나가 실패해도 전체를 멈추지 않기**
+이상한 차트, 크기 정보가 없는 그림, 읽을 수 없는 이미지(EMF 등)는 건너뛰고 *경고 개수를 카운팅합니다*. 
+업로드 전체가 실패하지 않으면서도 무엇을 읽지 못했는지는 처리 보고서(`report`)로 확인할 수 있습니다.
 
-저장소 맨 위 폴더에 `.env` 파일을 만들고 아래 항목을 채웁니다. `.env`는 커밋하지 않습니다.
+**2) 처리 시간·메모리에 상한 두기**
+OCR은 문서당 스캔 50쪽·그림 100개로 상한을 두었습니다. 
+4코어 CPU에서 테스트 시 스캔 쪽은 쪽당 2~5초, 그림은 장당 약 0.5초였고, 업로드가 한 요청 안에서 끝나는 구조라 최악의 경우를 계산해 기본값을 정했습니다. 
 
-| 항목 | 필수 | 내용 | 기본값 |
-|---|:---:|---|---|
-| `DATABASE_URL` | 필수 | 팀 공용 MySQL 접속 주소. 발급·형식은 [MYSQL_ACCESS.md](MYSQL_ACCESS.md) 참고 | — |
-| `DB_SSL_CA` | 팀 공개 DB 필수 | 예제의 공개 CA 인증서 경로. 상대 경로는 저장소 루트 기준이며 TLS 인증서 오류 시 접속을 거부 | — |
-| `OPENAI_API_KEY` | 필수 | 임베딩·답변·요약에 사용하는 OpenAI API 키 | — |
-| `OPENAI_CHAT_MODEL` | 선택 | 답변·요약 모델 | `gpt-5` |
-| `OPENAI_EMBEDDING_MODEL` | 선택 | 임베딩 모델 | `text-embedding-3-small` |
-| `CHROMA_DB_PATH` | 선택 | 벡터 저장소 폴더 | `data/chroma_db` |
-| `UPLOAD_DIR` | 선택 | 업로드 원본 보관 폴더 | `data/uploads` |
-| `CHUNK_SIZE`, `CHUNK_OVERLAP` | 선택 | 청크 길이와 겹침(글자 수) | `1000`, `150` |
-| `SEARCH_MIN_SCORE`, `SEARCH_TOP_K_MAX` | 선택 | 검색 최소 유사도와 최대 조회 수 | `0.3`, `80` |
-| `SESSION_TTL_MINUTES` | 선택 | 로그인 세션 유지 시간(분) | `480` |
-| `DOC_CLASSIFY` | 선택 | 업로드 중 문서 유형·회사 일치 자동 분류(OpenAI Decisions API, `OPENAI_API_KEY` 사용). `1`이면 켬 | `0` (끔) |
+**3) OCR 도구를 근거로 선택하기**
+무료·속도·한글 정확도, 그리고 *사내 문서가 외부로 나가지 않아야 한다*는 보안 기준으로 후보를 비교했습니다. 
+같은 문서·같은 해상도에서 PaddleOCR, RapidOCR, Tesseract를 직접 측정했고(스캔 3개·보고서 1개), EasyOCR·Surya·Clova는 직접 측정하지 못해 웹 검색 결과로만 판단했습니다.
 
-### 계정 만들기
+| 도구 | 디지털 보고서 재현율 | 쪽당 시간(CPU) | 판단 |
+|---|---|---|---|
+| **PaddleOCR 모바일 검출** | 94.9% | 1.2~5.5초 | **결정** |
+| PaddleOCR 서버 검출 | 95.0% | 4.9~9.3초 | 정확도 차이는 노이즈 수준인데 2~4배 느려 제외 |
+| RapidOCR | 89.5% | 1.4~4.4초 | 디자인 문서에서 낮음 |
+| Tesseract | 83.0% | 1.4~6.4초 | 한글 정확도 가장 낮음 |
 
-계정은 DB 접속 권한이 있는 운영자가 명령으로 만듭니다. 비밀번호는 실행 중에 입력하며 명령줄에 적지 않습니다.
+**4) 의존성 때문에 팀 전체가 막히지 않게 분리하기**
+PaddleOCR을 설치하면 numpy·PyYAML 버전이 내려가는 문제가 PR 리뷰에서 확인되어, OCR 패키지를 `requirements-ocr.txt`로 분리했습니다. 
+설치하지 않아도 OCR만 꺼지고 업로드는 정상 동작합니다. 
+PaddlePaddle 3.3.x의 CPU 오류도 확인해 3.2.0으로 고정했습니다.
 
-```bash
-python -m hyundap.auth.create_account --email admin@example.com --role platform_admin
-```
+**5) 한계를 숨기지 않고 문서에 남기기**
+OCR한 한글은 띄어쓰기가 많이 빠지고, 표는 글자만 읽고 행·열 구조는 인식하지 못합니다. 
+이런 한계와 읽지 않는 대상(텍스트 상자·도형 속 글자 등)을 [ingest README](hyundap/ingest/README.md)에 그대로 적었습니다.
 
-역할은 `platform_admin`(전체 관리자), `company_admin`(회사 관리자), `employee`(직원) 중 하나입니다. 회사 관리자와 직원은 `--company-id`로 소속 회사 ID를 함께 지정합니다. 자세한 내용은 [auth 명세](hyundap/auth/docs/spec.md)를 참고합니다.
+### 협업
+
+- 이슈 번호를 연결한 커밋(`Closes #…`, `Refs #…`)과 PR 리뷰 반영으로 작업을 추적했습니다.
+- 다른 폴더(`db`, `embedding`, `common`)는 직접 고치지 않고 정해진 함수·자료형(`IngestResult`, `Chunk`)으로만 연결했습니다.
+  이로 인해 DB 담당은 오류 코드만 읽어 실패 원인을 기록하고, 임베딩 담당은 청크 목록만 받으면 되었습니다.
+- 팀원이 바로 가져다 쓸 수 있도록 담당 폴더의 사용법·오류 코드·한계를 별도 README와 명세서로 정리했습니다.
+
+### 더 보기
+
+| 문서 | 내용 |
+|---|---|
+| [hyundap/ingest/README.md](hyundap/ingest/README.md) | 사용 방법, 입출력, 오류 코드, OCR 동작과 한계 |
+| [hyundap/ingest/docs/spec.md](hyundap/ingest/docs/spec.md) | 기능 명세, 구현 계획, OCR 도구 선택 기록 |
+| [hyundap/ingest/](hyundap/ingest/) | 소스 코드 (`validator.py`, `loaders/`, `normalizer.py`, `chunker.py`, `pipeline.py`) |
+| `hyundap/tests/test_ingest*.py` | ingest 테스트 |
 
 <br>
 
-## 테스트와 품질
+## 3. 팀 구성
 
-| 구분 | 내용 | 결과·문서 |
+7명이 폴더별로 역할을 나눠 개발했습니다.
+
+| 이름 | 역할 | 폴더 |
 |---|---|---|
-| 단위·통합 테스트 | 폴더별 테스트 31개 파일. MySQL이 필요한 DB 테스트는 테스트 DB 주소가 있을 때만 실행 | `python -m unittest discover -s hyundap/tests -t .` |
-| 기능 점검 (WBS 4.1) | 형식별 업로드, 필터 검색, 검색 정확도, 권한, 예외 상황 43건 | 41/43 통과 · [결과서](hyundap/tests/qa/TEST_REPORT.md) · [시나리오](hyundap/tests/qa/TEST_SCENARIOS.md) |
-| 사용성 테스트 | 실제 계정으로 로그인부터 업로드·검색·요약까지 화면 점검 | [결과](hyundap/tests/usability/RESULTS.md) · [계획](hyundap/tests/usability/TEST_PLAN.md) |
+| 이성민 (팀장) | 일정·통합, 공통 설정, 로그인·계정, 테스트·QA | `common/` `auth/` `tests/` |
+| 전재경 | DB 설계·저장, 회사 권한 확인 | `db/` |
+| 박영준 | 임베딩·벡터 저장 | `embedding/` |
+| 박경환 | 화면(UI)·앱 실행 | `ui/` `app.py` |
+| 이준영 | 검색·필터 | `search/` |
+| 소용우 | AI 답변·요약 | `chatbot/` |
+| **김혜리** | **문서 수집·전처리** | **`ingest/`** |
 
-기능 점검에서 남은 실패 2건은 결과서 5장에 정리했습니다(검색 정확도 1문항, 구형 Office 파일 안내 1건).
-
-<br>
-
-## 개발 규칙
-
-- **폴더 담당**: 각자 담당 폴더만 수정합니다. 다른 폴더 변경이 필요하면 이슈나 PR 리뷰로 담당자에게 요청합니다.
-- **브랜치와 PR**: `develop`에서 작업 브랜치를 만들고, PR로 `develop`에 병합합니다. 병합 전 리뷰 승인 1건이 필요합니다.
-- **주석과 문서**: 코드 주석과 docstring은 한글로 씁니다.
-- **import**
-
-| 상황 | 쓰는 법 |
-|---|---|
-| 다른 폴더 기능 | `from hyundap.common.config import get_settings` |
-| 같은 폴더 안 파일 | `from .models import IngestError` |
-| 쓰지 않는 형태 | `from common...`처럼 `hyundap.`이 없는 형태, `sys.path` 조작 |
-
-<br>
-
-<img src="images/h_stack.png" alt="TECH STACK" width="100%" />
-
-| 구분 | 사용 기술 |
-|---|---|
-| 화면 | Gradio |
-| AI | OpenAI(`gpt-5`, `text-embedding-3-small`), LangChain |
-| 저장소 | MySQL(Railway), Chroma(벡터 저장소) |
-| 문서 처리 | pypdf, python-docx, python-pptx |
-| 협업 | GitHub(이슈·PR·리뷰) |
-
-<img src="images/stack_chips.png" alt="Claude, ChatGPT, Gemini" width="650" />
-
-<br>
+팀 단위 점검 결과: 기능 점검 43건 중 41건 통과([결과서](hyundap/tests/qa/TEST_REPORT.md)), 사용성 테스트는 [결과 문서](hyundap/tests/usability/RESULTS.md)에 정리했습니다.
